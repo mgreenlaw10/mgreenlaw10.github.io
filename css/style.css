@@ -1,0 +1,323 @@
+:root {
+    --bg: #f7f7f8;
+    --surface: #ffffff;
+    --text: #1d1d1f;
+    --muted: #5f6368;
+    --border: #e2e2e6;
+    --placeholder: #e9e9ee;
+    --header: #f1f1f4;
+    --link: #2357d9;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #121214;
+        --surface: #1c1c1f;
+        --text: #ececf0;
+        --muted: #a0a0a8;
+        --border: #2e2e33;
+        --placeholder: #2a2a2f;
+        --header: #242428;
+        --link: #7aa2ff;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.55;
+}
+
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 48px 16px 64px;
+}
+
+section + section {
+    margin-top: 48px;
+}
+
+h1, h2, h3 {
+    line-height: 1.2;
+    margin: 0 0 12px;
+}
+
+h2 {
+    font-size: 1.4rem;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 1.1rem;
+}
+
+p {
+    margin: 0 0 12px;
+    color: var(--muted);
+}
+
+a {
+    color: var(--link);
+    font-weight: 500;
+}
+
+.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--placeholder);
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+/* Panels: each section (About Me, Current Projects, Highlighted Projects)
+   is a full-width panel with a light gray title box across the top. */
+.panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+section.panel + section.panel {
+    margin-top: 32px;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 56px;
+    padding: 10px 24px;
+    background: var(--header);
+    border-bottom: 1px solid var(--border);
+}
+
+.panel-header h2 {
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: 1.2rem;
+}
+
+.panel-body {
+    padding: 24px;
+}
+
+/* About Me: photo + description */
+.intro {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+.photo {
+    flex-shrink: 0;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    user-select: none;
+}
+
+@media (max-width: 600px) {
+    .intro {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .panel-header,
+    .panel-body {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+/* Project widgets */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Images keep their own shape: full width, no cropping. */
+.card-image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Grey box shown only on the edit page when there's no image yet. */
+.card-image.placeholder {
+    aspect-ratio: 16 / 9;
+}
+
+.card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+
+/* "View on GitHub": darker blue, pinned to the bottom of the widget. */
+.btn.btn-github {
+    align-self: flex-start;
+    margin-top: auto;
+    background: #1a3fa3;
+}
+
+/* Shown instead of "View on GitHub" when the repo is private. Not clickable. */
+.btn.btn-private {
+    align-self: flex-start;
+    margin-top: auto;
+    background: #d93025;
+    cursor: default;
+    user-select: none;
+}
+
+.btn.btn-github:hover {
+    background: #142f7a;
+}
+
+/* Without an image, keep the title clear of the Edit button. */
+.card:has(.card-edit):not(:has(.card-image)) h3 {
+    padding-right: 56px;
+}
+
+.card {
+    position: relative;
+}
+
+.card-edit {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.intro-text {
+    flex: 1;
+}
+
+.intro .btn {
+    align-self: flex-start;
+}
+
+
+.logout {
+    display: flex;
+    justify-content: flex-end;
+    margin: -32px 0 16px;
+}
+
+/* Buttons */
+.btn,
+button {
+    display: inline-block;
+    padding: 8px 14px;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
+    color: #fff;
+    background: var(--link);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-red {
+    background: #d93025;
+}
+
+.btn-red:hover {
+    background: #b3261e;
+}
+
+.btn-secondary {
+    color: var(--text);
+    background: var(--surface);
+    border-color: var(--border);
+}
+
+/* Login and edit pages */
+main.narrow {
+    max-width: 360px;
+}
+
+main.edit {
+    max-width: 560px;
+}
+
+.subtitle {
+    margin-top: -8px;
+}
+
+.login-form,
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.login-form label,
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.9rem;
+}
+
+.field small {
+    color: var(--muted);
+}
+
+.edit-form .card-image {
+    border-radius: 8px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+}
+
+input,
+textarea {
+    padding: 8px 10px;
+    font: inherit;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[type="file"] {
+    padding: 6px;
+}
+
+.error {
+    color: #d93025;
+}
